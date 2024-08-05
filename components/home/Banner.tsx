@@ -105,7 +105,7 @@ const Banner = () => {
         </div>
       </SwiperSlide>
     ))
-  ), [movies, truncateOverview]);
+  ), [movies, genres, truncateOverview]);
 
   if(movies.length === 0) {
     return <div className="relative px-4 py-2 w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] "><div className="h-full rounded-md bg-gradient-to-r from-gray-100 to-gray-300 animate-pulse"></div></div>

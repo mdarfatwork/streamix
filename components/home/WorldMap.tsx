@@ -24,19 +24,24 @@ const WorldMap = () => {
         setMoviesShow(true);
     };
 
+    const handleCloseMovies = () => {
+        setMoviesShow(false);
+        setCountry(null);
+    };
+
     return (
         <div className='relative'>
-            <div className='mx-4 my-2 h-96 sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] bg-blue-200 rounded-md overflow-hidden mb-6'>
+            {moviesShow && <ShowMovies countryCode={country?.code} onSend={handleCloseMovies} />}
+            <div className={`${moviesShow && "hidden"} mx-4 my-2 h-96 sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] bg-blue-200 rounded-md overflow-hidden mb-6`}>
                 <VectorMap
                     map={worldMill}
                     backgroundColor="#bfdbfe"
                     zoomAnimate={true}
                     zoomOnScroll={true}
                     onRegionClick={handleRegionClick}
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                 />
             </div>
-            {moviesShow && <ShowMovies countryCode={country?.code} onSend={()=>setMoviesShow(false)} /> }
         </div>
     )
 }

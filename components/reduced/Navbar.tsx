@@ -13,8 +13,8 @@ const Navbar = () => {
         </Link>
       </span>
       <ul className='flex gap-2 md:gap-3 items-center text-base md:text-lg xl:text-xl'>
-        <li className='cursor-pointer text-blue-50 font-medium'><Link href="/sgin-">Register</Link></li>
-        <li className='cursor-pointer py-1 px-2 bg-blue-50 text-blue-500 font-medium rounded-md'><Link href="/login">Login</Link></li>
+        <li className='cursor-pointer text-blue-50 font-medium'><Link href="/sign-up">Register</Link></li>
+        <li className='cursor-pointer py-1 px-2 bg-blue-50 text-blue-500 font-medium rounded-md'><Link href="/sign-in">Login</Link></li>
       </ul>
       </div>
     </div>
