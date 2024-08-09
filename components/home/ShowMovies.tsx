@@ -4,6 +4,7 @@ import axios from 'axios';
 import { RxCross1 } from 'react-icons/rx'
 import Image from 'next/image';
 import Link from 'next/link';
+import debounce from "lodash.debounce";
 
 type Props = {
     countryCode: string | undefined;
@@ -21,24 +22,25 @@ const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>();
 
+    const fetchMovies = debounce(async () => {
+        try {
+            setLoading(true);
+            const responseMovies = await axios.get(`https://api.themoviedb.org/3/discover/movie?include_adult=false&page=1&sort_by=popularity.desc&with_origin_country=${countryCode}`, {
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_Read_Access_Token}`
+                }
+            });
+            setMovies(responseMovies.data.results);
+        } catch (error) {
+            console.error('Error fetching movies:', error);
+        } finally {
+            setLoading(false);
+        }
+    }, 300);
+    
     useEffect(() => {
-        const fetchMovies = async () => {
-            try {
-                setLoading(true);
-                const responseMovies = await axios.get(`https://api.themoviedb.org/3/discover/movie?include_adult=false&page=1&sort_by=popularity.desc&with_origin_country=${countryCode}`, {
-                    headers: {
-                        accept: 'application/json',
-                        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_Read_Access_Token}`
-                    }
-                });
-                setMovies(responseMovies.data.results);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching movies:', error);
-                setLoading(false);
-            }
-        };
-        fetchMovies();
+        if (countryCode) fetchMovies();
     }, [countryCode]);
 
     return (
