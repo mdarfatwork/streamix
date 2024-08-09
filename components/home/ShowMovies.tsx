@@ -41,7 +41,7 @@ const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
     
     useEffect(() => {
         if (countryCode) fetchMovies();
-    }, [countryCode]);
+    }, [countryCode, fetchMovies]);
 
     return (
         <div className="w-full px-4 bg-blue-50 z-10 pb-2">

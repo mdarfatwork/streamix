@@ -48,7 +48,7 @@ const Verification = () => {
       if (code.length === 6) {
         handleVerify();
       }
-    }, [code]);
+    }, [code, handleVerify]);
   
     const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;

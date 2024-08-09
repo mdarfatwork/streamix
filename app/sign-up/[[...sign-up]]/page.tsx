@@ -18,7 +18,7 @@ interface Error {
   message: string
 }
 
-const page = () => {
+const Page = () => {
   const { isLoaded, signUp } = useSignUp()
   const { register, handleSubmit, formState: { errors }, } = useForm<FormInput>()
   const [verifying, setVerifying] = useState<boolean>(false)
@@ -163,4 +163,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page;
