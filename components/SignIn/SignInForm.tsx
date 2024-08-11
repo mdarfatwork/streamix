@@ -109,7 +109,7 @@ const SignInForm = () => {
         <input className='bg-blue-500 text-blue-50 font-semibold cursor-pointer p-2 w-full text-center rounded-md' type="submit" value="Continue" />
       </form>
       <hr className='w-full border border-blue-500 mt-6 mb-4' />
-      <span className="w-full block text-center">Don't have an account? <Link href='/sign-up'><strong className='cursor-pointer'>Sign Up</strong></Link></span>
+      <span className="w-full block text-center">Don&apos;t have an account? <Link href='/sign-up'><strong className='cursor-pointer'>Sign Up</strong></Link></span>
     </section>
   )
 }
