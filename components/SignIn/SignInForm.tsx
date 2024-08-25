@@ -82,7 +82,7 @@ const SignInForm = () => {
           const response = await axios.post("/api/create-subscription", { customerId: getUser.customerId });
           const data = response.data;
 
-          const options = useMemo(() => ({
+          const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
             subscription_id: data.subscriptionId,
             name: "Streamix",
@@ -124,7 +124,7 @@ const SignInForm = () => {
             theme: {
               color: "#3399cc"
             },
-          }), [getUser, handleGetSubscription, signInAttempt.createdSessionId]);
+          }
 
           const rzp1 = new window.Razorpay(options);
           rzp1.open();
