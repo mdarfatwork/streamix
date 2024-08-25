@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
             total_count: 12,
             start_at: startTime,
             customer_id: customerId,
-        });
+        } as any);
 
         return NextResponse.json({ subscriptionId: subscription.id }, { status: 200 });
     } catch (error) {
