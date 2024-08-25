@@ -38,10 +38,10 @@ const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
             setLoading(false);
         }
     }, 300);
-    
+
     useEffect(() => {
         if (countryCode) fetchMovies();
-    }, [countryCode, fetchMovies]);
+    }, [countryCode]);
 
     return (
         <div className="w-full px-4 bg-blue-50 z-10 pb-2">

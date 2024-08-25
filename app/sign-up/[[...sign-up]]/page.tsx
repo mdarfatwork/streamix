@@ -12,7 +12,7 @@ const Page = () => {
   const { userId } : { userId: string | null } = auth();
   if (userId) redirect('/');
   return (
-    <main className="flex flex-col min-h-[90vh] py-2">
+    <main className="flex flex-col min-h-[90vh] py-5">
     <SignUpFlow />
     </main>
   )

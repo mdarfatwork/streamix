@@ -1,22 +1,27 @@
 "use client"
 import React, { useState } from 'react'
-import Verification from '@/components/SignUp/Verification'
-import SignUpForm from '@/components/SignUp/SignUpForm'
+import Verification from './Verification'
+import SignUpForm from './SignUpForm'
+
+interface OnSend {
+    isSuccess: boolean;
+    phone: string
+}
 
 const SignUpFlow = () => {
     const [verifying, setVerifying] = useState<boolean>(false)
+    const [phoneNumber, setPhoneNumber] = useState<string>("")
 
-    const handleOnSend = (data: boolean) => setVerifying(data)
+    const handleOnSendSignUP = (data: OnSend) => {
+        setVerifying(data.isSuccess)
+        setPhoneNumber(data.phone)
+    }
 
     return (
         <>
-            {verifying ? (
-                <Verification />
-            ) : (
-                <SignUpForm onSend={handleOnSend} />
-            )}
+            {!verifying ? <SignUpForm onSend={handleOnSendSignUP} /> : <Verification phone={phoneNumber} />}
         </>
     )
 }
 
-export default SignUpFlow
+export default SignUpFlow;

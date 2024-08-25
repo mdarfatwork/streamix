@@ -3,8 +3,8 @@ import { connectDB, prisma } from "@/lib/connectdb";
 
 export async function POST(req: NextRequest) {
     try {
-        const { createdUserId, firstName, lastName, emailAddress } = await req.json();
-        const createdAt = new Date(); 
+        const { createdUserId, firstName, lastName, emailAddress, phone, subscriptionId, customerId } = await req.json();
+        const createdAt = new Date();
 
         await connectDB();
 
@@ -14,9 +14,12 @@ export async function POST(req: NextRequest) {
                 firstName: firstName,
                 lastName: lastName,
                 email: emailAddress,
+                phone: phone,
+                subscriptionId: subscriptionId,
+                customerId: customerId,
                 createdAt: createdAt,
             },
-          });
+        });
 
         return NextResponse.json({ user: newUser }, { status: 200 });
     } catch (error) {
