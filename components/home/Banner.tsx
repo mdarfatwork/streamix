@@ -3,9 +3,10 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-import 'swiper/css';
+import 'swiper/css/bundle';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import Image from 'next/image';
 
 interface Movie {
   id: number;
@@ -77,10 +78,9 @@ const Banner = () => {
   const movieSlides = useMemo(() => (
     movies.map((movie) => (
       <SwiperSlide key={movie.id}>
-        <div
-          className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})` }}
-        >
+        <div className="w-full h-full bg-cover bg-center relative">
+          <Image src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} 
+          className='absolute top-0 w-auto h-auto object-cover object-center -z-10' fill={true} />
           <div className="bg-gray-900 bg-opacity-50 w-full h-full flex items-center justify-center lg:justify-start lg:pl-24 xl:pl-32">
             <div className="text-center lg:text-left text-white flex flex-col gap-2 lg:gap-3">
               <h2 className="text-3xl font-bold">{movie.title}</h2>
