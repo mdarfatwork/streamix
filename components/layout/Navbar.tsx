@@ -19,11 +19,11 @@ const Navbar = () => {
         {isSignedIn ? (
           <>
             <ul className='flex gap-2 md:gap-3 items-center text-sm md:text-base xl:text-lg 2xl:text-xl'>
-              <Link href="/trending">
-                <li className='cursor-pointer py-1 px-1 md:px-2 bg-blue-50 text-blue-500 font-medium rounded-md'>Trending</li>
+              <Link href="/movies">
+                <li className='cursor-pointer py-1 px-1 md:px-2 bg-blue-50 text-blue-500 font-medium rounded-md'>Movies</li>
               </Link>
-              <Link href="/discover">
-                <li className='cursor-pointer py-1 px-1 md:px-2 bg-blue-50 text-blue-500 font-medium rounded-md'>Discover</li>
+              <Link href="/series">
+                <li className='cursor-pointer py-1 px-1 md:px-2 bg-blue-50 text-blue-500 font-medium rounded-md'>Series</li>
               </Link>
             </ul>
             <span>
