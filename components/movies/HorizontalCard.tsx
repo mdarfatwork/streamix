@@ -50,6 +50,7 @@ const HorizontalCard = ({ userId, contentData }: { userId: string | null, conten
                         className="w-full h-full object-cover"
                         width={250}
                         height={250}
+                        quality={20}
                         loading="lazy"
                         decoding="async"
                         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
