@@ -83,6 +83,7 @@ const CardFlow = ({ userId, contentType }: { userId: string | null, contentType:
             headers: {
               accept: 'application/json',
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_Read_Access_Token}`,
+              'Accept-Encoding': 'gzip, deflate, br',
             },
           });
     

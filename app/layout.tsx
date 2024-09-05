@@ -20,6 +20,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="lucky-pug-82.clerk.accounts.dev" />
+      </head>
       <body className={inter.className}>
         <main className="bg-blue-50 w-full min-h-screen">
           <Navbar/>
