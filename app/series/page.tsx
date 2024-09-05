@@ -1,11 +1,22 @@
 import React from 'react'
+import { auth } from '@clerk/nextjs/server';
+import Banner from '@/components/home/Banner';
+import { Metadata } from 'next';
+import CardFlow from '@/components/movies/CardFlow';
 
-const Page = () => {
+export const metadata: Metadata = {
+  title: 'Series - Streamix',
+  description: "Immerse yourself in captivating TV series on Streamix. From binge-worthy dramas to thrilling adventures, discover and stream your favorite shows with ease. Enjoy tailored recommendations and never miss an episode."
+};
+
+const page = () => {
+  const { userId } : { userId: string | null } = auth();
   return (
-    <div>
-      
-    </div>
+    <section className='min-h-screen'>
+      <Banner contentType="tv" sliceLength={7} userId={userId} />
+      <CardFlow contentType="tv" userId={userId} />
+    </section>
   )
 }
 
-export default Page
+export default page
