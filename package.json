@@ -15,7 +15,7 @@
     "@react-jvectormap/world": "^1.1.2",
     "axios": "^1.7.2",
     "crypto": "^1.0.1",
-    "framer-motion": "^11.3.30",
+    "framer-motion": "^11.5.4",
     "lodash.debounce": "^4.0.8",
     "next": "14.2.5",
     "prisma": "^5.18.0",

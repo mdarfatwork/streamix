@@ -26,7 +26,7 @@ const HorizontalCard = ({ userId, contentData }: { userId: string | null, conten
                     }
                 });
             },
-            { threshold: 0.25 }
+            { threshold: 0.10 }
         );
 
         if (cardRef.current) {
@@ -41,8 +41,8 @@ const HorizontalCard = ({ userId, contentData }: { userId: string | null, conten
     }, []);
 
     return (
-        <div ref={cardRef} className="relative min-w-72 max-h-40 rounded-md overflow-hidden cursor-pointer z-20">
-            <Link href={userId === null ? "/sign-in" : "/movies"}>
+        <div ref={cardRef} className="relative min-w-72 max-w-80 min-h-40 max-h-40 rounded-md overflow-hidden cursor-pointer z-20">
+            <Link href={userId === null ? "/sign-in" : `/watch?${contentData.title ? "movie" : "series"}=${contentData.id}`}>
                 {isVisible && contentData.backdrop_path ? (
                     <Image
                         src={`https://image.tmdb.org/t/p/original/${contentData.backdrop_path}`}
@@ -56,7 +56,7 @@ const HorizontalCard = ({ userId, contentData }: { userId: string | null, conten
                         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 ) : (
-                    <div className="bg-gray-200 text-gray-400 w-full h-full flex flex-col items-center justify-center">
+                    <div className="bg-gray-200 text-gray-400 w-full min-h-40 h-full flex flex-col items-center justify-center">
                         <span className="text-lg lg:text-xl font-bold text-center">{displayName}</span>
                         <span className="text-base lg:text-lg text-center">STREAMIX</span>
                     </div>

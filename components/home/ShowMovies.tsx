@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import debounce from "lodash.debounce";
 import { motion } from 'framer-motion';
+import { useUser } from '@clerk/nextjs';
 
 type Props = {
     countryCode: string | undefined;
@@ -21,6 +22,7 @@ interface Movie {
 
 const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
+    const user = useUser();
 
     const fetchMovies = debounce(async () => {
         try {
@@ -50,7 +52,7 @@ const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
                     {movies.length > 0 ? (
                         movies.filter(movie => movie.poster_path).map((movie) => (
                             <div key={movie.id} className="relative cursor-pointer">
-                                <Link href="/sign-in">
+                                <Link href={`${user.user === null ? "/sign-in" : `/watch?movie=${movie.id}`}`}>
                                     <Image
                                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                         width={500}

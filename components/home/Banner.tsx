@@ -102,7 +102,7 @@ const Banner = ({ sliceLength, userId, contentType }: { sliceLength: number, use
                 <span>Release Date <strong>{formatDate(item.release_date || item.first_air_date)}</strong></span>
               </div>
               <div className="w-full flex items-center justify-center lg:justify-start">
-                <Link href={userId === null ? "/sign-in" : `/movies/`}>
+                <Link href={userId === null ? "/sign-in" : `/watch?${contentType === "movie" ? "movie" : "series"}=${item.id}`}>
                   <motion.button className="mt-4 px-4 py-2 w-fit bg-blue-500 text-white font-semibold rounded" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
                     Play
                   </motion.button>

@@ -26,7 +26,7 @@ const VerticalCard = ({ userId, contentData }: { userId: string | null, contentD
                     }
                 });
             },
-            { threshold: 0.25 } // Load when 25% of the card is visible
+            { threshold: 0.10 } // Load when 10% of the card is visible
         );
 
         if (cardRef.current) {
@@ -42,7 +42,7 @@ const VerticalCard = ({ userId, contentData }: { userId: string | null, contentD
 
     return (
         <div ref={cardRef} className="relative min-w-48 max-h-80 rounded-md overflow-hidden cursor-pointer z-20">
-            <Link href={userId === null ? "/sign-in" : "/movies"}>
+            <Link href={userId === null ? "/sign-in" : `/watch?${contentData.title ? "movie" : "series"}=${contentData.id}`}>
                 {isVisible && contentData.poster_path ? (
                     <Image
                         src={`https://image.tmdb.org/t/p/original/${contentData.poster_path}`}

@@ -10,13 +10,13 @@ const Navbar = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="w-full bg-blue-500 py-3">
+    <div className="w-full bg-blue-500 py-3 z-30 relative">
       <div className="w-11/12 sm:w-4/5 md:w-3/4 xl:w-2/3 2xl:w-3/5 mx-auto flex justify-between items-center">
-        <span>
+        <motion.span whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
           <Link href="/">
             <Image priority={true} alt='logo' src="/Logo.svg" className='w-20 sm:w-28 md:w-36 lg:w-40' width={150} height={50} />
           </Link>
-        </span>
+        </motion.span>
         {isSignedIn ? (
           <>
             <ul className='flex gap-2 md:gap-3 items-center text-sm md:text-base xl:text-lg 2xl:text-xl'>
