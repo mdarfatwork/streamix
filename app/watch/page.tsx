@@ -11,10 +11,9 @@ interface WatchPageProps {
   };
 }
 
-const { userId }: { userId: string | null } = auth();
-
 const Page = async ({ searchParams }: WatchPageProps) => {
   const { movie, series } = searchParams;
+  const { userId }: { userId: string | null } = auth();
 
   if (movie) {
     return <MoviePage userId={userId} movieId={movie} />
