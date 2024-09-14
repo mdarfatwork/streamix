@@ -36,9 +36,9 @@ interface SocialMedia {
 
 interface PersonDetailsProps {
   userId: string | null;
-  personDetails: PersonDetails;
-  personContent: ContentData[];
-  personSocialMedia: SocialMedia;
+  personDetails: PersonDetails | null;
+  personContent: ContentData[] | null;
+  personSocialMedia: SocialMedia | null;
 }
 
 const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }: PersonDetailsProps) => {
@@ -70,6 +70,10 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
     { platform: 'Twitter', id: personSocialMedia?.twitter_id, url: `https://twitter.com/${personSocialMedia?.twitter_id}`, icon: <FaTwitter /> },
     { platform: 'YouTube', id: personSocialMedia?.youtube_id, url: `https://youtube.com/${personSocialMedia?.youtube_id}`, icon: <FaYoutube /> }
   ].filter(link => link.id && typeof link.id === 'string');
+
+  if (!personDetails || !personContent || !personSocialMedia) {
+    return <p className='min-h-screen'>Loading...</p>;
+  }
 
   return (
     <>
