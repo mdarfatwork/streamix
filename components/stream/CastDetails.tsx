@@ -27,7 +27,6 @@ const CastDetails = ({ cast }: { cast: CastMember[] }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
         >
-            <h2 className="w-full text-2xl font-bold mb-4">Cast</h2>
             {actingCast.map((member) => (
                 <motion.div
                     key={member.id}

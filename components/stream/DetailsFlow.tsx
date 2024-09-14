@@ -37,9 +37,7 @@ const DetailsFlow = ({ cast, content, userId }: DetailsFlowProps) => {
         <li onClick={()=>setIsShow("cast")} className={`${isShow === "cast" && "underline"} cursor-pointer`}>Cast</li>
         <li onClick={()=>setIsShow("details")} className={`${isShow === "details" && "underline"} cursor-pointer`}>Related</li>
       </ul>
-      <button onClick={() => setIsShow(isShow === "cast"? "details" : "cast")}>
         {isShow === "cast"? <CastDetails cast={cast} /> : <RelatedMovies content={content} userId={userId} />}
-      </button>
     </section>
   )
 }

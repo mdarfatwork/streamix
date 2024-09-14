@@ -41,7 +41,7 @@ const HorizontalCard = ({ userId, contentData }: { userId: string | null, conten
     }, []);
 
     return (
-        <div ref={cardRef} className="relative min-w-72 max-w-80 min-h-40 max-h-40 rounded-md overflow-hidden cursor-pointer z-20">
+        <div ref={cardRef} className="relative min-w-72 max-w-72 min-h-40 max-h-40 rounded-md overflow-hidden cursor-pointer z-20">
             <Link href={userId === null ? "/sign-in" : `/watch?${contentData.title ? "movie" : "series"}=${contentData.id}`}>
                 {isVisible && contentData.backdrop_path ? (
                     <Image

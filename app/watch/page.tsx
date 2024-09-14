@@ -1,6 +1,7 @@
 import React from 'react'
 import MoviePage from '@/components/stream/MoviePage';
 import { Metadata } from 'next';
+import SeriesPage from '@/components/stream/SeriesPage';
 
 interface WatchPageProps {
   searchParams: {
@@ -17,7 +18,7 @@ const Page = async ({ searchParams }: WatchPageProps) => {
   }
 
   if (series) {
-    return <div>Streaming series with ID: {series}</div>
+    return <SeriesPage seriesId={series} />
   }
   return (
     <div className='min-h-screen flex items-center justify-center'>No movie or series selected</div>
