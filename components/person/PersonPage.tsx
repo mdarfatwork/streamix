@@ -64,12 +64,12 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
   }, []);
 
   const socialMediaLinks = [
-    { platform: 'Facebook', id: personSocialMedia.facebook_id, url: `https://facebook.com/${personSocialMedia.facebook_id}`, icon: <FaFacebook /> },
-    { platform: 'Instagram', id: personSocialMedia.instagram_id, url: `https://instagram.com/${personSocialMedia.instagram_id}`, icon: <FaInstagram /> },
-    { platform: 'TikTok', id: personSocialMedia.tiktok_id, url: `https://tiktok.com/@${personSocialMedia.tiktok_id}`, icon: <FaTiktok /> },
-    { platform: 'Twitter', id: personSocialMedia.twitter_id, url: `https://twitter.com/${personSocialMedia.twitter_id}`, icon: <FaTwitter /> },
-    { platform: 'YouTube', id: personSocialMedia.youtube_id, url: `https://youtube.com/${personSocialMedia.youtube_id}`, icon: <FaYoutube /> }
-  ];
+    { platform: 'Facebook', id: personSocialMedia?.facebook_id, url: `https://facebook.com/${personSocialMedia?.facebook_id}`, icon: <FaFacebook /> },
+    { platform: 'Instagram', id: personSocialMedia?.instagram_id, url: `https://instagram.com/${personSocialMedia?.instagram_id}`, icon: <FaInstagram /> },
+    { platform: 'TikTok', id: personSocialMedia?.tiktok_id, url: `https://tiktok.com/@${personSocialMedia?.tiktok_id}`, icon: <FaTiktok /> },
+    { platform: 'Twitter', id: personSocialMedia?.twitter_id, url: `https://twitter.com/${personSocialMedia?.twitter_id}`, icon: <FaTwitter /> },
+    { platform: 'YouTube', id: personSocialMedia?.youtube_id, url: `https://youtube.com/${personSocialMedia?.youtube_id}`, icon: <FaYoutube /> }
+  ].filter(link => link.id && typeof link.id === 'string');
 
   return (
     <>
@@ -89,35 +89,33 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
           )}
           <p>{personDetails.biography}</p>
           <ul className='flex gap-4 mt-4'>
-            {socialMediaLinks
-              .filter(link => link.id) // Only show links that exist
-              .map((link, index) => (
-                <motion.li key={index} whileHover={{ scale: 1.5 }}>
-                  <a href={link.url} target='_blank' rel='noopener noreferrer' className='text-2xl lg:text-3xl hover:text-blue-600 transition-colors'>
-                    {link.icon}
-                  </a>
-                </motion.li>
-              ))}
+            {personSocialMedia && socialMediaLinks.map((link, index) => (
+              <motion.li key={index} whileHover={{ scale: 1.5 }}>
+                <a href={link.url} target='_blank' rel='noopener noreferrer' className='text-2xl lg:text-3xl hover:text-blue-600 transition-colors'>
+                  {link.icon}
+                </a>
+              </motion.li>
+            ))}
           </ul>
         </div>
       </motion.section>
       <section className="bg-blue-500 text-blue-50 p-3 rounded-md mx-5 mb-3">
-      <h3 className='text-2xl text-center font-semibold mb-3'>Movie and TV Shows of {personDetails.name}</h3>
-      <motion.div className="flex gap-4 w-full flex-wrap justify-center"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}>
-            {personContent.map((item) => (
-                <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    key={item.id}
-                >
-                    <HorizontalCard userId={userId} contentData={item as ContentData} />
-                </motion.div>
-            ))}
+        <h3 className='text-2xl text-center font-semibold mb-3'>Movie and TV Shows of {personDetails.name}</h3>
+        <motion.div className="flex gap-4 w-full flex-wrap justify-center"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}>
+          {personContent.map((item) => (
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              key={item.id}
+            >
+              <HorizontalCard userId={userId} contentData={item as ContentData} />
+            </motion.div>
+          ))}
         </motion.div>
-        </section>
+      </section>
     </>
   )
 }
