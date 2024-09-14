@@ -2,6 +2,7 @@ import React from 'react'
 import MoviePage from '@/components/stream/MoviePage';
 import { Metadata } from 'next';
 import SeriesPage from '@/components/stream/SeriesPage';
+import { auth } from '@clerk/nextjs/server';
 
 interface WatchPageProps {
   searchParams: {
@@ -10,11 +11,13 @@ interface WatchPageProps {
   };
 }
 
+const { userId }: { userId: string | null } = auth();
+
 const Page = async ({ searchParams }: WatchPageProps) => {
   const { movie, series } = searchParams;
 
   if (movie) {
-    return <MoviePage movieId={movie} />
+    return <MoviePage userId={userId} movieId={movie} />
   }
 
   if (series) {

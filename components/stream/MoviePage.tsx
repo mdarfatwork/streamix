@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import { auth } from '@clerk/nextjs/server';
 import Player from './Player';
 import DetailsFlow from './DetailsFlow';
 
@@ -24,8 +23,6 @@ interface CastMember {
     profile_path: string | null;
     known_for_department: string;
 }
-
-const { userId }: { userId: string | null } = auth();
 
 const fetchMovieVideo = async (movieId: string) => {
     try {
@@ -105,7 +102,7 @@ const fetchRelatedMovies = async (movieId: string) => {
     }
 }
 
-const MoviePage = async ({ movieId }: { movieId: string }) => {
+const MoviePage = async ({ movieId, userId }: { movieId: string, userId:string | null }) => {
     const movie = await fetchMovieVideo(movieId)
     const cast = await fetchMovieDetails(movieId);
     const relatedMovies = await fetchRelatedMovies(movieId);
