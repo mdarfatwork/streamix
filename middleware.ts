@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 // Define your public routes
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/forgot-password', '/', '/api(.*)', "/test", "/movies"]);
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/forgot-password', '/', '/api(.*)', "/test"]);
 
 // Middleware function to handle CORS and Clerk authentication
 export default clerkMiddleware((auth, request) => {
