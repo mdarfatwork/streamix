@@ -10,7 +10,6 @@ interface PersonPageProps {
   };
 }
 
-
 const fetchData = async (url: string, contentName: string) => {
   try {
     const response = await axios.get(url, {
@@ -21,7 +20,9 @@ const fetchData = async (url: string, contentName: string) => {
     })
     return response.data
   } catch (error: any) {
+    console.error(error)
     console.error(`Error while Fetching the ${contentName} ${error.message}`)
+    return null;
   }
 }
 const fetchContent = async (id: string) => {
@@ -34,7 +35,9 @@ const fetchContent = async (id: string) => {
     })
     return response.data.cast
   } catch (error: any) {
+    console.error(error)
     console.error(`Error while Fetching the Content ${error.message}`)
+    return null;
   }
 }
 
