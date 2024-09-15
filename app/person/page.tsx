@@ -15,7 +15,7 @@ const fetchData = async (url: string, contentName: string) => {
     const response = await axios.get(url, {
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_READ_ACCESS_TOKEN}`
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_Read_Access_Token}`
       }
     })
     return response.data
@@ -30,7 +30,7 @@ const fetchContent = async (id: string) => {
     const response = await axios.get(`https://api.themoviedb.org/3/person/${id}/combined_credits?language=en-US`, {
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_READ_ACCESS_TOKEN}`
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_Read_Access_Token}`
       }
     })
     return response.data.cast
