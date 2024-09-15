@@ -76,11 +76,11 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
   }
 
   return (
-    <>
-      <motion.section className='w-11/12 sm:w-4/5 md:w-3/4 xl:w-2/3 2xl:w-3/5 mx-auto my-3 text-blue-500 flex gap-4 items-center' initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}>
+    <motion.section initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8 }}>
+      <article className='w-11/12 sm:w-4/5 md:w-3/4 xl:w-2/3 2xl:w-3/5 mx-auto my-3 text-blue-500 flex gap-4 items-center'>
         <Image priority={true} alt={personDetails.name} src={`https://image.tmdb.org/t/p/w500${personDetails.profile_path}`} width={300} height={450} className='object-cover rounded-lg min-w-80 max-w-96 h-auto' />
         <div className='flex flex-col gap-3 lg:text-lg'>
           <h2 className='text-lg lg:text-xl xl:text-2xl font-bold'>{personDetails.name}</h2>
@@ -102,8 +102,8 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
             ))}
           </ul>
         </div>
-      </motion.section>
-      <section className="bg-blue-500 text-blue-50 p-3 rounded-md mx-5 mb-3">
+      </article>
+      <article className="bg-blue-500 text-blue-50 p-3 rounded-md mx-5 mb-3">
         <h3 className='text-2xl text-center font-semibold mb-3'>Movie and TV Shows of {personDetails.name}</h3>
         <motion.div className="flex gap-4 w-full flex-wrap justify-center"
           initial={{ opacity: 0, y: 50 }}
@@ -119,8 +119,8 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
             </motion.div>
           ))}
         </motion.div>
-      </section>
-    </>
+      </article>
+    </motion.section>
   )
 }
 
