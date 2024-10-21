@@ -1,8 +1,9 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { motion } from 'framer-motion'
 import Image from 'next/image';
 import Link from 'next/link';
+import { fetchCommonImage } from './fetchCommonImage';
 
 interface CastMember {
     id: number;
@@ -14,6 +15,24 @@ interface CastMember {
 }
 
 const CastDetails = ({ cast }: { cast: CastMember[] }) => {
+    const [commonImages, setCommonImages] = useState<{ [id: number]: string | null }>({});
+
+    const fetchAndSetCommonImage = async (id: number) => {
+        const commonImage = await fetchCommonImage("person", id, 0.67);
+        setCommonImages((prevImages) => ({
+            ...prevImages,
+            [id]: commonImage
+        }));
+    };
+
+    useEffect(() => {
+        cast.forEach((member) => {
+            if (!member.profile_path) {
+                fetchAndSetCommonImage(member.id); // Fetch common image for members without profile path
+            }
+        });
+    }, [cast]);
+
     const actingCast = cast
         .filter((member) => member.known_for_department === 'Acting')
         .sort((a, b) => b.popularity - a.popularity);
@@ -34,9 +53,9 @@ const CastDetails = ({ cast }: { cast: CastMember[] }) => {
                     whileHover={{ scale: 1.05 }}
                 >
                     <Link href={`person?id=${member.id}`}>
-                        {member.profile_path ? (
+                        {member.profile_path || commonImages[member.id] ? (
                             <Image
-                                src={`https://image.tmdb.org/t/p/w300${member.profile_path}`}
+                            src={`https://image.tmdb.org/t/p/w300${member.profile_path || commonImages[member.id]}`}
                                 alt={member.name}
                                 width={150}
                                 height={225}

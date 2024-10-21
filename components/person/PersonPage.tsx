@@ -1,9 +1,10 @@
 "use client"
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaYoutube } from 'react-icons/fa';
 import HorizontalCard from '../movies/HorizontalCard';
+import { fetchCommonImage } from '../stream/fetchCommonImage';
 
 interface PersonDetails {
   id: number;
@@ -14,7 +15,7 @@ interface PersonDetails {
   gender: number;
   deathday: string | null;
   place_of_birth: string;
-  profile_path: string;
+  profile_path: string | null;
 }
 
 interface ContentData {
@@ -42,6 +43,8 @@ interface PersonDetailsProps {
 }
 
 const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }: PersonDetailsProps) => {
+  const [commonImage, setCommonImage] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const formatDate = useCallback((dateString: string | undefined): string => {
     if (typeof dateString !== 'string') return '';
@@ -63,6 +66,25 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
     }
   }, []);
 
+  const fetchAndSetCommonImage = useCallback(async () => {
+    if (personDetails && !personDetails.profile_path) {
+      const response = await fetchCommonImage('person', personDetails.id, 0.66);
+      setCommonImage(response);
+    }
+  }, [personDetails]);
+
+  useEffect(() => {
+    fetchAndSetCommonImage();
+  }, [fetchAndSetCommonImage]);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+  };
+
   const socialMediaLinks = [
     { platform: 'Facebook', id: personSocialMedia?.facebook_id, url: `https://facebook.com/${personSocialMedia?.facebook_id}`, icon: <FaFacebook /> },
     { platform: 'Instagram', id: personSocialMedia?.instagram_id, url: `https://instagram.com/${personSocialMedia?.instagram_id}`, icon: <FaInstagram /> },
@@ -77,11 +99,34 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
 
   return (
     <motion.section initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8 }}>
-      <article className='w-11/12 sm:w-4/5 md:w-3/4 xl:w-2/3 2xl:w-3/5 mx-auto my-3 text-blue-500 flex gap-4 items-center'>
-        <Image priority={true} alt={personDetails.name} src={`https://image.tmdb.org/t/p/w500${personDetails.profile_path}`} width={300} height={450} className='object-cover rounded-lg min-w-80 max-w-96 h-auto' />
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}>
+      <article className='w-11/12 md:w-4/5 xl:w-2/3 2xl:w-3/5 mx-auto my-3 text-blue-500 flex flex-col md:flex-row gap-4 items-center'>
+        {imageLoading && (
+          <div className="absolute inset-0 h-full w-full">
+            <div className="h-[450px] w-[300px] rounded-md bg-gradient-to-r from-gray-100 to-gray-300 animate-pulse"></div>
+          </div>
+        )}
+        {personDetails.profile_path || commonImage ? (
+          <Image
+            alt={personDetails.name}
+            src={`https://image.tmdb.org/t/p/w500${personDetails.profile_path || commonImage}`}
+            width={300}
+            height={450}
+            className={`object-cover rounded-lg min-w-80 max-w-96 h-auto ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+            quality={50}
+            priority={true}
+            decoding="async"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+          />
+        ) : (
+          <div className="bg-gray-200 text-gray-400 min-w-[300px] h-[450px] flex flex-col items-center justify-center rounded-md">
+            <span className="text-lg lg:text-xl font-bold text-center">{personDetails.name}</span>
+            <span className="text-base lg:text-lg text-center">STREAMIX</span>
+          </div>
+        )}
         <div className='flex flex-col gap-3 lg:text-lg'>
           <h2 className='text-lg lg:text-xl xl:text-2xl font-bold'>{personDetails.name}</h2>
           <span>Birthday: <b>{formatDate(personDetails.birthday)}</b></span>
@@ -124,4 +169,4 @@ const PersonPage = ({ userId, personDetails, personContent, personSocialMedia }:
   )
 }
 
-export default PersonPage
+export default PersonPage;

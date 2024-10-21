@@ -20,7 +20,7 @@ const Page = async ({ searchParams }: WatchPageProps) => {
   }
 
   if (series) {
-    return <SeriesPage seriesId={series} />
+    return <SeriesPage userId={userId} seriesId={series} />
   }
   return (
     <div className='min-h-screen flex items-center justify-center'>No movie or series selected</div>

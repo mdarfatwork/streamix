@@ -1,17 +1,17 @@
 "use client"
 import React from 'react';
 
-const Player = ({ movie, movieId }: { movie: any, movieId: string }) => {
+const Player = ({ video, videoId }: { video: any, videoId: string }) => {
 
     return (
         <>
-            {movie ? (
-                <section className='w-full min-h-screen flex items-center justify-center p-5'>
+            {video ? (
+                <section className='w-full flex items-center justify-center p-5'>
                     <div className='relative w-full h-0' style={{ paddingBottom: '56.25%' }}>
                         <iframe
-                            key={movieId}
-                            src={`https://www.youtube.com/embed/${movie.key}`}
-                            title={movie.name}
+                            key={videoId}
+                            src={`https://www.youtube.com/embed/${video.key}`}
+                            title={video.name}
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen

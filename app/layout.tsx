@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { ClerkProvider } from '@clerk/nextjs'
 import Footer from "@/components/layout/Footer";
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <link rel="preconnect" href="lucky-pug-82.clerk.accounts.dev" />
       </head>
       <body className={inter.className}>
+      <NextTopLoader color="#1d4ed8" height={5} />
         <main className="bg-blue-50 w-full min-h-screen">
           <Navbar/>
             {children}

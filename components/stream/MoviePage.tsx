@@ -3,7 +3,6 @@ import axios from 'axios';
 import Player from './Player';
 import DetailsFlow from './DetailsFlow';
 
-
 interface Movie {
     id: number;
     title?: string;
@@ -103,13 +102,13 @@ const fetchRelatedMovies = async (movieId: string) => {
 }
 
 const MoviePage = async ({ movieId, userId }: { movieId: string, userId:string | null }) => {
-    const movie = await fetchMovieVideo(movieId)
+    const youtubeVideo = await fetchMovieVideo(movieId)
     const cast = await fetchMovieDetails(movieId);
     const relatedMovies = await fetchRelatedMovies(movieId);
 
     return (
         <>
-            <Player movieId={movieId} movie={movie} />
+            <Player videoId={movieId} video={youtubeVideo} />
             <main className='w-full p-5'>
             <DetailsFlow cast={cast} content={relatedMovies} userId={userId}/>
             </main>

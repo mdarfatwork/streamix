@@ -8,7 +8,7 @@ interface Movie {
     title?: string;
     name?: string;
     genres: { id: number; name: string }[];
-    release_date: string;
+    release_date?: string;
     overview: string;
     backdrop_path: string | null;
     poster_path: string | null;

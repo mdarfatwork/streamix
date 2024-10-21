@@ -40,7 +40,7 @@ const ShowMovies: React.FC<Props> = ({ countryCode, onSend }) => {
 
     useEffect(() => {
         if (countryCode) fetchMovies();
-    }, [countryCode]);
+    }, [countryCode, fetchMovies]);
 
     if (movies.length === 0) return <div className="h-96 sm:h-[400px] md:h-[450px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] rounded-md bg-gradient-to-r from-gray-100 to-gray-300 animate-pulse"></div>;
 

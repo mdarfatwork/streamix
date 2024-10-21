@@ -135,7 +135,7 @@ const CardFlow = ({ userId, contentType }: { userId: string | null, contentType:
           }
         };
         fetchContentSequentially();
-      }, [contentType, fetchContent, genres]);
+      }, [contentType, fetchContent, genres, pageByGenre]);
 
     return (
         <>
